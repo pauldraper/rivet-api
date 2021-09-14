@@ -1,1 +1,1 @@
-# Rivethealth API
+# Rivet API

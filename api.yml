@@ -152,15 +152,18 @@ components:
                   type: object
                   properties:
                     coinsurance:
+                      title: Coinsurance
                       type: object
                       properties:
                         proportion:
                           type: string
                     deductible:
+                      title: Deductible
                       type: object
                       properties:
                         type: string
                     oop:
+                      title: Out-of-pocket max
                       type: object
                       properties:
                         amount:
