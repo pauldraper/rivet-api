@@ -1,0 +1,351 @@
+openapi: '3.0.3'
+info:
+  description: Rivet API.
+  version: '0.0.0'
+  title: Rivet API
+  contact:
+    email: ops@rivethealth.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: https://api.rivethealth.com/v1
+    description: Production
+    variables: {}
+tags:
+  - name: Estimates
+    description: Patient estimates.
+  - name: Service locations
+    description: Service locations.
+paths:
+  /accounts/{accountId}/estimations:
+    parameters:
+      - $ref: '#/components/parameters/accountId'
+    post:
+      tags:
+        - Estimates
+      summary: Create a new estimation
+      operationId: createEstimation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/estimation' }
+      responses:
+        '201':
+          description: Created
+        '405':
+          description: 'Invalid input'
+      security:
+        - rivet_auth:
+            - write
+            - read
+  /accounts/{accountId}/estimation/{estimationId}:
+    parameters:
+      - $ref: '#/components/parameters/accountId'
+      - name: 'estimationId'
+        in: 'path'
+        description: 'ID of estimation'
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - Estimates
+      summary: Get estimation
+      description: 'Returns a single pet'
+      operationId: getEstimation
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/estimation' }
+        '400':
+          description: 'Invalid ID supplied'
+        '404':
+          description: 'Pet not found'
+  /accounts/{accountId}/estimation/{estimationId}/estimate:
+    parameters:
+      - $ref: '#/components/parameters/accountId'
+      - name: 'estimationId'
+        in: 'path'
+        description: 'ID of estimation'
+        required: true
+        schema:
+          type: string
+    get:
+      operatonId: getEstimate
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/estimate' }
+      summary: Get estimate result
+      tags: Estimates
+  /insurancePlans:
+    {}
+    # get: {}
+    # post: {}
+  /providers:
+    {}
+    # get: {}
+    # post: {}
+  /accounts/{accountId}/serviceLocations:
+    parameters:
+      - $ref: '#/components/parameters/accountId'
+    get:
+      operationId: 'listServiceLocations'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/serviceLocation' }
+          description: Success.
+      tags:
+        - Service locations
+components:
+  parameters:
+    accountId:
+      in: path
+      name: accountId
+      required: true
+      schema:
+        type: string
+  schemas:
+    address:
+      description: Address.
+      title: Address
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          default: ''
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          description: Country code, e.g. US
+          title: Country
+          type: string
+        postalCode:
+          description: Postal code (ZIP code).
+          title: Postal code
+          type: string
+      required: [line1, city, state, postalCode, country]
+    estimate:
+      properties:
+        treatments:
+          items:
+            properties:
+              patient:
+                properties:
+                  payment:
+                    type: string
+                type: object
+              payers:
+                items:
+                  type: object
+                  properties:
+                    coinsurance:
+                      type: object
+                      properties:
+                        proportion:
+                          type: string
+                    deductible:
+                      type: object
+                      properties:
+                        type: string
+                    oop:
+                      type: object
+                      properties:
+                        amount:
+                          type: string
+                    logs:
+                      description: Explanations
+                      items:
+                        type: string
+                      type: array
+                    payment:
+                      type: string
+                type: array
+            type: object
+          type: array
+      title: Estimation result
+      type: object
+    estimation:
+      description: Estimation.
+      title: Estimation
+      type: object
+      properties:
+        patient: { $ref: '#/components/schemas/estimation' }
+        treatments:
+          description: Treatments.
+          title: Treatment
+          type: array
+          items: { $ref: '#/components/schemas/estimationTreatment' }
+    patient:
+      description: Patient.
+      properties:
+        name: { $ref: '#/components/schemas/personName' }
+        address: { $ref: '#/components/schemas/address' }
+        ref:
+          description: External reference
+          title: Reference
+          type: string
+      title: Person
+      type: object
+    insurancePolicy:
+      description: Insurance policy.
+      properties:
+        insurancePlanId:
+          description: ID of insurance plan
+          title: Insurance plan ID
+          type: string
+        memberId:
+          description: Insurance-provided member ID
+          title: Member ID
+          type: string
+        subscriber:
+          default: null
+          description: Insurance subscriber.
+          properties:
+            birthdate:
+              description: Subscriber birthdate
+              format: date
+              title: Birthdate
+              type: string
+            name:
+              $ref: '#/components/schemas/personName'
+              description: Name of subscriber
+              title: Name
+          title: Subscriber
+          type: object
+        subscriberRelationship:
+          default: self
+          description: Relationship of subscriber to patient
+          enum:
+            - child
+            - domestic_partner
+            - other
+            - parent
+            - self
+            - spouse
+            - unknown
+          type: string
+      title: Insurance policy
+      type: object
+    estimationTreatment:
+      description: Estimation treatment.
+      type: object
+      properties:
+        insurancePolicies:
+          type: array
+          items: { $ref: '#/components/schemas/insurancePolicy' }
+        procedures:
+          type: array
+          items: { $ref: '#/components/schemas/estimationProcedure' }
+        serviceDate:
+          description: Date of service
+          type: string
+          format: date
+        serviceLocationId:
+          description: ID of service location
+          title: Service location ID
+          type: string
+      title: Estimation treatment
+    estimationProcedure:
+      description: Estimation procedure.
+      properties:
+        code:
+          description: CPT/HCPC code of procedure
+          title: Code
+          type: string
+        modifiers:
+          description: CPT/HCPC modifier codes
+          default: []
+          title: Modifiers
+          type: array
+          items: { type: string }
+        quantity:
+          description: Quantity of units
+          title: Quantity
+          type: number
+      required: [code, quantity]
+      title: Estimation procedure
+      type: object
+    personName:
+      description: Person name
+      properties:
+        first:
+          type: string
+        last:
+          type: string
+        middle:
+          default: ''
+          type: string
+        suffix:
+          default: ''
+          type: string
+      required: [first, last]
+      title: Person name
+      type: object
+    provider:
+      description: Provider
+      properties:
+        address: { $ref: '#/components/schemas/address' }
+        organizationName:
+          description: Name, if organization.
+          title: Organization name
+          type: string
+        personName:
+          $ref: '#/components/schemas/personName'
+          description: Name, if person.
+          title: Person name
+        credentials:
+          type: array
+          items: { type: string }
+        npi:
+          description: National Provider Identifier
+          title: NPI
+          type: string
+        type:
+          enum:
+            - organization
+            - person
+          title: Type
+      required: [address, type]
+      title: Provider
+      type: object
+    serviceLocation:
+      description: Service location.
+      properties:
+        address: { $ref: '#/components/schemas/address' }
+        name:
+          description: Name of service location.
+          title: Name
+          type: string
+        placeOfService:
+          description:
+            Place of service code. See
+            https://www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set
+            .
+          title: Place of service
+          type: string
+      required: [address, name, placeOfService]
+      title: Service location
+      type: object
+  securitySchemes:
+    rivet_auth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://api.rivethealth.com/oauth/authorize'
+          tokenUrl: 'https://api.rivethealth.com/oauth/token'
+          scopes:
+            write: write
+            read: read
