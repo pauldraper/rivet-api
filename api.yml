@@ -16,22 +16,22 @@ components:
           title: Line 1
           type: string
         line2:
-          default: ''
+          default: ""
           title: Line 2
           type: string
         city:
           title: City
           type: string
         state:
-          description: 'State code, e.g. AK'
+          description: "State code, e.g. AK"
           title: State
           type: string
         country:
-          description: 'Country code, e.g. US'
+          description: "Country code, e.g. US"
           title: Country
           type: string
         postalCode:
-          default: ''
+          default: ""
           description: Postal code (ZIP code).
           title: Postal code
           type: string
@@ -56,7 +56,7 @@ components:
             additionalProperties: false
             properties:
               amounts:
-                $ref: '#/components/schemas/estimateAmounts'
+                $ref: "#/components/schemas/estimateAmounts"
               payers:
                 items:
                   type: object
@@ -65,7 +65,7 @@ components:
                       insurancePolicyId:
                         type: string
                       amounts:
-                        $ref: '#/components/schemas/estimateAmounts'
+                        $ref: "#/components/schemas/estimateAmounts"
                 type: array
               procedures:
                 items:
@@ -82,7 +82,7 @@ components:
             type: object
           type: array
         total:
-          $ref: '#/components/schemas/estimateAmounts'
+          $ref: "#/components/schemas/estimateAmounts"
       title: Estimate
       type: object
     estimateAmounts:
@@ -109,10 +109,10 @@ components:
                       additionalProperties: false
                       properties:
                         comment:
-                          default: ''
+                          default: ""
                           type: string
                         coverageLevel:
-                          $ref: '#/components/schemas/coverageLevel'
+                          $ref: "#/components/schemas/coverageLevel"
                           default: null
                           nullable: true
                         placeOfService:
@@ -152,10 +152,10 @@ components:
                       additionalProperties: false
                       properties:
                         comment:
-                          default: ''
+                          default: ""
                           type: string
                         coverageLevel:
-                          $ref: '#/components/schemas/coverageLevel'
+                          $ref: "#/components/schemas/coverageLevel"
                           default: null
                           nullable: true
                         placeOfService:
@@ -198,10 +198,10 @@ components:
                         amount:
                           type: string
                         comment:
-                          default: ''
+                          default: ""
                           type: string
                         coverageLevel:
-                          $ref: '#/components/schemas/coverageLevel'
+                          $ref: "#/components/schemas/coverageLevel"
                           default: null
                           nullable: true
                         placeOfService:
@@ -258,7 +258,7 @@ components:
           title: Treatment
           type: array
           items:
-            $ref: '#/components/schemas/estimationTreatment'
+            $ref: "#/components/schemas/estimationTreatment"
       required:
         - patientId
         - treatments
@@ -309,10 +309,10 @@ components:
                     proportion:
                       type: string
                     comment:
-                      default: ''
+                      default: ""
                       type: string
                     coverageLevel:
-                      $ref: '#/components/schemas/coverageLevel'
+                      $ref: "#/components/schemas/coverageLevel"
                       default: null
                       nullable: true
                     placeOfService:
@@ -326,15 +326,15 @@ components:
                   required:
                     - proportion
                 copay:
-                  $ref: '#/paths/~1accounts~1%7BaccountId%7D~1estimation~1%7BestimationId%7D~1estimate/get/responses/200/content/application~1json/schema/properties/total/properties/insurance/items/properties/copays/items/properties/benefit'
+                  $ref: "#/paths/~1accounts~1%7BaccountId%7D~1estimation~1%7BestimationId%7D~1estimate/get/responses/200/content/application~1json/schema/properties/total/properties/insurance/items/properties/copays/items/properties/benefit"
                   default: null
                   nullable: true
                 deductible:
-                  $ref: '#/paths/~1accounts~1%7BaccountId%7D~1estimation~1%7BestimationId%7D~1estimate/get/responses/200/content/application~1json/schema/properties/total/properties/insurance/items/properties/deductibles/items/properties/benefit'
+                  $ref: "#/paths/~1accounts~1%7BaccountId%7D~1estimation~1%7BestimationId%7D~1estimate/get/responses/200/content/application~1json/schema/properties/total/properties/insurance/items/properties/deductibles/items/properties/benefit"
                   default: null
                   nullable: true
                 outOfPocketMax:
-                  $ref: '#/paths/~1accounts~1%7BaccountId%7D~1estimation~1%7BestimationId%7D~1estimate/get/responses/200/content/application~1json/schema/properties/total/properties/insurance/items/properties/outOfPocketMaxes/items/properties/benefit'
+                  $ref: "#/paths/~1accounts~1%7BaccountId%7D~1estimation~1%7BestimationId%7D~1estimate/get/responses/200/content/application~1json/schema/properties/total/properties/insurance/items/properties/outOfPocketMaxes/items/properties/benefit"
                   default: null
                   nullable: true
               eligibility:
@@ -353,7 +353,7 @@ components:
                   - inquiryX12
                   - responseX12
               policy:
-                $ref: '#/components/schemas/insurancePolicy'
+                $ref: "#/components/schemas/insurancePolicy"
                 title: Policy
             required:
               - policy
@@ -362,7 +362,7 @@ components:
         procedures:
           type: array
           items:
-            $ref: '#/components/schemas/estimationProcedure'
+            $ref: "#/components/schemas/estimationProcedure"
         serviceDate:
           description: Date of service
           type: string
@@ -380,9 +380,9 @@ components:
       description: Patient.
       properties:
         name:
-          $ref: '#/components/schemas/personName'
+          $ref: "#/components/schemas/personName"
         address:
-          $ref: '#/components/schemas/address'
+          $ref: "#/components/schemas/address"
         ref:
           description: External reference
           title: Reference
@@ -445,7 +445,7 @@ components:
               title: Birthdate
               type: string
             name:
-              $ref: '#/components/schemas/personName'
+              $ref: "#/components/schemas/personName"
               description: Name of subscriber
               title: Name
             relationship:
@@ -483,13 +483,13 @@ components:
           title: Last
           type: string
         middle:
-          default: ''
+          default: ""
           description: Middle name.
           maxLength: 100
           title: Middle
           type: string
         suffix:
-          default: ''
+          default: ""
           description: Suffix.
           maxLength: 20
           title: Suffix
@@ -504,18 +504,18 @@ components:
       description: Provider
       properties:
         address:
-          $ref: '#/components/schemas/address'
+          $ref: "#/components/schemas/address"
         organizationName:
           default: null
-          description: 'Name, if organization.'
+          description: "Name, if organization."
           maxLength: 200
           nullable: true
           title: Organization name
           type: string
         personName:
-          $ref: '#/components/schemas/personName'
+          $ref: "#/components/schemas/personName"
           default: null
-          description: 'Name, if person.'
+          description: "Name, if person."
           nullable: true
           title: Person name
         taxonomies:
@@ -543,14 +543,14 @@ components:
       description: Service location.
       properties:
         address:
-          $ref: '#/components/schemas/address'
+          $ref: "#/components/schemas/address"
         name:
           description: Name of service location
           maxLength: 200
           title: Name
           type: string
         placeOfService:
-          description: 'Place of service code. See https://www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set'
+          description: "Place of service code. See https://www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set"
           title: Place of service
           type: string
       required:
@@ -565,7 +565,7 @@ components:
         id:
           type: string
         value:
-          $ref: '#/components/schemas/serviceLocation'
+          $ref: "#/components/schemas/serviceLocation"
   securitySchemes:
     rivet_auth:
       flows:
@@ -580,8 +580,8 @@ openapi: 3.0.3
 info:
   contact:
     email: ops@rivethealth.com
-    name: 'Rivet Health, Inc.'
-    url: 'https://rivethealth.com'
+    name: "Rivet Health, Inc."
+    url: "https://rivethealth.com"
   description: |
     # Overview
     The Rivet API provides access programmatic access to Rivet features.
@@ -695,18 +695,18 @@ info:
     When the estimate is saved, it uses `postMessage('estimationSaved')` to notify the parent window.
   license:
     name: MIT
-    url: 'https://opensource.org/licenses/MIT'
-  termsOfService: 'https://www.rivethealth.com/terms'
+    url: "https://opensource.org/licenses/MIT"
+  termsOfService: "https://www.rivethealth.com/terms"
   title: Rivet API
   version: 0.0.0
 servers:
   - description: Production
-    url: 'https://api.rivethealth.com/v1'
+    url: "https://api.rivethealth.com/v1"
     variables: {}
 paths:
-  '/accounts/{accountId}/business-units':
+  "/accounts/{accountId}/business-units":
     parameters:
-      - $ref: '#/components/parameters/accountId'
+      - $ref: "#/components/parameters/accountId"
       - description: External reference
         in: query
         name: ref
@@ -715,7 +715,7 @@ paths:
     get:
       operationId: list-business-units
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -726,7 +726,7 @@ paths:
                     title: ID
                     type: string
                   value:
-                    $ref: '#/paths/~1accounts~1%7BaccountId%7D~1business-units~1%7BbusinessUnitId%7D/get/responses/200/content/application~1json/schema'
+                    $ref: "#/paths/~1accounts~1%7BaccountId%7D~1business-units~1%7BbusinessUnitId%7D/get/responses/200/content/application~1json/schema"
                 title: Business unit item
                 type: object
           description: Success.
@@ -736,24 +736,24 @@ paths:
     post:
       operationId: create-business-unit
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1accounts~1%7BaccountId%7D~1business-units/get/responses/200/content/application~1json/schema'
+                $ref: "#/paths/~1accounts~1%7BaccountId%7D~1business-units/get/responses/200/content/application~1json/schema"
           description: Updated.
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1accounts~1%7BaccountId%7D~1business-units/get/responses/200/content/application~1json/schema'
+                $ref: "#/paths/~1accounts~1%7BaccountId%7D~1business-units/get/responses/200/content/application~1json/schema"
           description: Created.
       summary: Create business unit
       tags:
         - Practice
-  '/accounts/{accountId}/business-units/{businessUnitId}':
+  "/accounts/{accountId}/business-units/{businessUnitId}":
     parameters:
-      - $ref: '#/components/parameters/accountId'
+      - $ref: "#/components/parameters/accountId"
       - description: Business unit ID
         in: path
         name: businessUnitId
@@ -762,14 +762,14 @@ paths:
     get:
       operationId: get-business-unit
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 description: Business unit.
                 properties:
                   address:
-                    $ref: '#/components/schemas/address'
+                    $ref: "#/components/schemas/address"
                   ref:
                     description: External reference.
                     maxLength: 100
@@ -781,7 +781,7 @@ paths:
                     title: TIN
                     maxLength: 9
                     minLength: 9
-                    pattern: '[0-9]{9}'
+                    pattern: "[0-9]{9}"
                     type: string
                   name:
                     description: Name of business unit.
@@ -793,9 +793,9 @@ paths:
       summary: Get business unit
       tags:
         - Practice
-  '/accounts/{accountId}/estimations':
+  "/accounts/{accountId}/estimations":
     parameters:
-      - $ref: '#/components/parameters/accountId'
+      - $ref: "#/components/parameters/accountId"
     post:
       tags:
         - Estimates
@@ -806,19 +806,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/estimation'
+              $ref: "#/components/schemas/estimation"
       responses:
-        '201':
+        "201":
           description: Created
-        '405':
+        "405":
           description: Invalid input
       security:
         - rivet_auth:
             - read
             - write
-  '/accounts/{accountId}/estimation/{estimationId}':
+  "/accounts/{accountId}/estimation/{estimationId}":
     parameters:
-      - $ref: '#/components/parameters/accountId'
+      - $ref: "#/components/parameters/accountId"
       - name: estimationId
         in: path
         description: ID of estimation
@@ -832,67 +832,67 @@ paths:
       operationId: getEstimation
       summary: Get estimation
       responses:
-        '200':
+        "200":
           description: Success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/estimation'
-        '400':
+                $ref: "#/components/schemas/estimation"
+        "400":
           description: Invalid ID supplied
-        '404':
+        "404":
           description: Estimation does not exist
     security:
       - rivet_auth:
           - read
-  '/accounts/{accountId}/estimation': {}
-  '/accounts/{accountId}/estimation/{estimationId}/doc': {}
-  '/accounts/{accountId}/estimation/{estimationId}/estimate':
+  "/accounts/{accountId}/estimation": {}
+  "/accounts/{accountId}/estimation/{estimationId}/doc": {}
+  "/accounts/{accountId}/estimation/{estimationId}/estimate":
     parameters:
-      - $ref: '#/components/parameters/accountId'
-      - $ref: '#/paths/~1accounts~1%7BaccountId%7D~1estimation~1%7BestimationId%7D/parameters/1'
+      - $ref: "#/components/parameters/accountId"
+      - $ref: "#/paths/~1accounts~1%7BaccountId%7D~1estimation~1%7BestimationId%7D/parameters/1"
     get:
       operationId: getEstimate
       responses:
-        '200':
+        "200":
           description: Success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/estimate'
+                $ref: "#/components/schemas/estimate"
       security:
         - rivet_auth:
             - read
       summary: Get estimate result
       tags:
         - Estimates
-  '/accounts/{accountId}/insurancePlans':
+  "/accounts/{accountId}/insurancePlans":
     parameters:
-      - $ref: '#/components/parameters/accountId'
+      - $ref: "#/components/parameters/accountId"
     get:
       summary: List insurance plans
       tags:
         - Insurance
       operationId: listInsurancePlans
       responses:
-        '200':
+        "200":
           description: Success.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/insurancePlan'
-  '/accounts/{accountId}/patients': {}
-  '/accounts/{accountId}/patients/{patientId}': {}
-  '/accounts/{accountId}/patients/{patientId}/cob': {}
-  '/accounts/{accountId}/insurance-plans': {}
-  '/accounts/{accountId}/insurance-plans/{insurancePlanId}': {}
-  '/accounts/{accountId}/insurance-policies': {}
-  '/accounts/{accountId}/insurance-policies/{insuranceId}': {}
-  '/accounts/{accountId}/providers/{providerId}':
+                  $ref: "#/components/schemas/insurancePlan"
+  "/accounts/{accountId}/patients": {}
+  "/accounts/{accountId}/patients/{patientId}": {}
+  "/accounts/{accountId}/patients/{patientId}/cob": {}
+  "/accounts/{accountId}/insurance-plans": {}
+  "/accounts/{accountId}/insurance-plans/{insurancePlanId}": {}
+  "/accounts/{accountId}/insurance-policies": {}
+  "/accounts/{accountId}/insurance-policies/{insuranceId}": {}
+  "/accounts/{accountId}/providers/{providerId}":
     parameters:
-      - $ref: '#/components/parameters/accountId'
+      - $ref: "#/components/parameters/accountId"
       - name: providerId
         in: path
         required: true
@@ -904,31 +904,31 @@ paths:
       tags:
         - Providers
       responses:
-        '200':
+        "200":
           description: Success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/provider'
+                $ref: "#/components/schemas/provider"
     put:
       operationId: updateProvider
       summary: Update provider
       tags:
         - Providers
       responses:
-        '204':
+        "204":
           description: Updated.
-  '/accounts/{accountId}/service-locations':
+  "/accounts/{accountId}/service-locations":
     parameters:
-      - $ref: '#/components/parameters/accountId'
+      - $ref: "#/components/parameters/accountId"
     get:
       operationId: list-service-locations
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/serviceLocationItem'
+                $ref: "#/components/schemas/serviceLocationItem"
           description: Success.
       summary: List service locations
       tags:
@@ -936,24 +936,24 @@ paths:
     post:
       operationId: create-service-location
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/serviceLocation'
+                $ref: "#/components/schemas/serviceLocation"
           description: Success.
       summary: Create service location
       tags:
         - Practice
-  '/accounts/{accountId}/service-locations/{serviceLocationId}':
+  "/accounts/{accountId}/service-locations/{serviceLocationId}":
     get:
       operationId: get-service-location
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/serviceLocation'
+                $ref: "#/components/schemas/serviceLocation"
           description: Success.
       summary: Get service location
       tags:
@@ -961,7 +961,7 @@ paths:
     put:
       operationId: update-service-location
       responses:
-        '204':
+        "204":
           description: Success.
       summary: Update service location
       tags:
@@ -974,7 +974,7 @@ paths:
       tags:
         - Other
       responses:
-        '200':
+        "200":
           description: Success.
 tags:
   - name: Estimates
@@ -988,4 +988,3 @@ tags:
   - name: Practice
     description: Practice configuration.
   - name: Other
-
