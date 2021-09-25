@@ -4,7 +4,7 @@ coinsurance:
     proportion:
       type: string
     comment:
-      default: ''
+      default: ""
       type: string
     coverageLevel:
       $ref: "#/coverageLevel"
@@ -25,7 +25,7 @@ copay:
     amount:
       type: string
     comment:
-      default: ''
+      default: ""
       type: string
     coverageLevel:
       $ref: "#/coverageLevel"
@@ -49,7 +49,7 @@ deductible:
   additionalProperties: false
   properties:
     comment:
-      default: ''
+      default: ""
       type: string
     coverageLevel:
       $ref: "#/coverageLevel"
@@ -77,7 +77,7 @@ outOfPocketMax:
   additionalProperties: false
   properties:
     comment:
-      default: ''
+      default: ""
       type: string
     coverageLevel:
       $ref: "#/coverageLevel"

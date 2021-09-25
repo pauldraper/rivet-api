@@ -65,7 +65,6 @@ insurancePolicy:
       required: [birthdate, name, relationship]
       title: Subscriber
       type: object
-      type: string
   required: [insurancePlanId, memberId, patientId]
   title: Insurance policy
   type: object

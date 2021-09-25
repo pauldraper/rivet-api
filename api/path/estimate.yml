@@ -25,7 +25,6 @@
     tags: [Estimates]
     description: Get an estimation.
     operationId: getEstimation
-    responses:
     summary: Get estimation
     responses:
       "200":

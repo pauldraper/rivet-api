@@ -22,7 +22,7 @@ address:
       title: Country
       type: string
     postalCode:
-      default: ''
+      default: ""
       description: Postal code (ZIP code).
       title: Postal code
       type: string

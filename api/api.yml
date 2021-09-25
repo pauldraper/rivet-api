@@ -41,13 +41,81 @@ info:
 
     This documentation is maintained in [https://github.com/rivethealth/rivet-api](https://github.com/rivethealth/rivet-api)
 
+    See the detailed documentation on endpoints listed in the sidebar.
+
     # Authorization
 
     ## API
 
-    Rivet uses OAuth2 to secure access to the API.
+    Rivet uses OAuth2 ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749))
+    for users to grant access to apps.
 
-    <SecurityDefinitions />
+    ### 1. Authorization URL
+
+    Direct the user to the authorization URL. If the optional `state`
+    parameter is given, it will be included in the later redirect.
+
+    ```
+    https://api.rivethealth.com/oauth/authorize
+      ?client_id=<client_id>
+      &redirect_uri=<redirect_url>
+      &response_type=code
+      &scope=write
+      &state=<state>
+    ```
+
+    ### 2. Redirect
+    After approving the request, the user is directed to the redirect URL, along
+    the code and account ID. When the access token is later retrieved, it will
+    be scoped to that account ID.
+
+    ```
+    <redirect_url>?account_id=<account_id>&code=<code>&state=<state>
+    ```
+
+    ### 3. Retrieve access token
+
+    Use the code to retrieve the access token via HTTPS. Use basic
+    authentication, with client ID as the username, and client secret as the
+    password.
+
+    ```
+    POST /oauth/token
+    Authorization: Basic <auth>
+    Content-Type: application/x-www-form-urlencoded
+    Host: api.rivethealth.com
+
+    code=<code>&grant_type=authorization_code
+    ```
+
+    The server responds with the token.
+
+    ```json
+    200 OK
+    Cache-Control: no-store
+    Content-Type: application/json
+    Pragma: no-cache
+
+    {
+      "access_token": "<access_token>",
+      "type":"bearer"
+    }
+    ```
+
+    The access token does not expire, but can be revoked. To test the token, you can use the`/auth` endpoint.
+
+    ### 4. Use
+
+    Include the token on authenticated requests.
+
+    ```
+    GET /example
+    Authorization: Bearer <access_token>
+    ```
+
+    ### Misc
+
+    Tokens can also be created manually in UI.
 
     ## Web UI
 
@@ -116,6 +184,8 @@ paths:
     $ref: "./path/practice.yml#/~1accounts~1{accountId}~1service-locations"
   /accounts/{accountId}/service-locations/{serviceLocationId}:
     $ref: "./path/practice.yml#/~1accounts~1{accountId}~1service-locations~1{serviceLocationId}"
+  /auth:
+    $ref: "./path/auth.yml#/~1auth"
 tags:
   - name: Estimates
     description: Patient estimates.
@@ -127,3 +197,4 @@ tags:
     description: Providers.
   - name: Practice
     description: Practice configuration.
+  - name: Other

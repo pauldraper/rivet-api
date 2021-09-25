@@ -22,5 +22,5 @@ api.html: api.yml redoc-options.txt
 	node_modules/.bin/redoc-cli bundle --output $@ $< $$(cat redoc-options.txt)
 
 deploy: api.yml
-	aws --profile rivet-prod s3 cp index.html s3://rivethealth-prod-io/index.html
-	aws --profile rivet-prod s3 cp api.yml s3://rivethealth-prod-io/api.yml
+	aws --profile rivet-prod s3 cp --cache-control max-age=60 index.html s3://rivethealth-prod-io/index.html
+	aws --profile rivet-prod s3 cp --cache-control max-age=60 api.yml s3://rivethealth-prod-io/api.yml
