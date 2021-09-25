@@ -24,3 +24,4 @@ api.html: api.yml redoc-options.txt
 deploy: api.yml
 	aws --profile rivet-prod s3 cp --cache-control max-age=60 index.html s3://rivethealth-prod-io/index.html
 	aws --profile rivet-prod s3 cp --cache-control max-age=60 api.yml s3://rivethealth-prod-io/api.yml
+	aws --profile rivet-prod s3 cp --cache-control max-age=600 --recursive assets/ s3://rivethealth-prod-io/assets/
