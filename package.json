@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "prettier": "~2.4.0",
+    "swagger-cli": "~4.0.4"
+  },
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "name": "rivet-api",
+  "private": true,
+  "version": "0.0.0"
+}

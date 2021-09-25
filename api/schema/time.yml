@@ -1,0 +1,9 @@
+datePeriod:
+  properties:
+    end:
+      format: date
+      type: string
+    start:
+      format: date
+      type: string
+  type: string

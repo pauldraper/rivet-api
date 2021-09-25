@@ -1,0 +1,51 @@
+/accounts/{accountId}/providers:
+  get:
+    operationId: listProviders
+    summary: List providers
+    tags:
+      - Providers
+    responses:
+      "200":
+        description: Success
+        content:
+          application/json:
+            schema: { $ref: "../schema/provider.yml#/providerListItem" }
+  post:
+    operationId: createProvider
+    summary: Create provider
+    tags:
+      - Providers
+    responses:
+      "200":
+        description: Updated.
+        content:
+          application/json:
+            schema: { $ref: "../schema/provider.yml#/provider" }
+      "201":
+        description: Created.
+        content:
+          application/json:
+            schema: { $ref: "../schema/provider.yml#/provider" }
+/accounts/{accountId}/providers/{providerId}:
+  parameters:
+    - $ref: "../parameter/account.yml#/accountId"
+    - $ref: "../parameter/provider.yml#/providerId"
+  get:
+    operationId: getProvider
+    summary: Get provider
+    tags:
+      - Providers
+    responses:
+      "200":
+        description: Success.
+        content:
+          application/json:
+            schema: { $ref: "../schema/provider.yml#/provider" }
+  put:
+    operationId: updateProvider
+    summary: Update provider
+    tags:
+      - Providers
+    responses:
+      "204":
+        description: Updated.

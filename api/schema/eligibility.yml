@@ -1,0 +1,11 @@
+eligibility:
+  properties:
+    inquiryX12:
+      description: X12 eligibility inquiry (270)
+      title: Inquiry X12
+      type: string
+    responseX12:
+      description: X12 eligibility response (271)
+      title: Response 12
+      type: string
+  required: [inquiryX12, responseX12]

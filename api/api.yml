@@ -1,0 +1,129 @@
+components:
+  # reference all components first
+  # see https://github.com/APIDevTools/swagger-parser/issues/127#issuecomment-922634697
+  parameters:
+    accountId: { $ref: "./parameter/account.yml#/accountId" }
+  schemas:
+    address: { $ref: "./schema/location.yml#/address" }
+    coverageLevel: { $ref: "./schema/benefit.yml#/coverageLevel" }
+    estimate: { $ref: "./schema/estimate.yml#/estimate" }
+    estimateAmounts: { $ref: "./schema/estimate.yml#/estimateAmounts" }
+    estimation: { $ref: "./schema/estimate.yml#/estimation" }
+    estimationProcedure: { $ref: "./schema/estimate.yml#/estimationProcedure" }
+    estimationTreatment: { $ref: "./schema/estimate.yml#/estimationTreatment" }
+    patient: { $ref: "./schema/patient.yml#/patient" }
+    insurancePlan: { $ref: "./schema/insurance.yml#/insurancePlan" }
+    insurancePlanItem: { $ref: "./schema/insurance.yml#/insurancePlanItem" }
+    insurancePolicy: { $ref: "./schema/insurance.yml#/insurancePolicy" }
+    personName: { $ref: "./schema/person.yml#/personName" }
+    provider: { $ref: "./schema/provider.yml#/provider" }
+    serviceLocation: { $ref: "./schema/practice.yml#/serviceLocation" }
+    serviceLocationItem: { $ref: "./schema/practice.yml#/serviceLocationItem" }
+  securitySchemes:
+    rivet_auth:
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth/authorize
+          scopes:
+            read: read
+            write: write
+          tokenUrl: /oauth/token
+      type: oauth2
+openapi: "3.0.3"
+info:
+  contact:
+    email: ops@rivethealth.com
+    name: Rivet Health, Inc.
+    url: https://rivethealth.com
+  description: |
+    # Overview
+    The Rivet API provides access programmatic access to Rivet features.
+
+    This documentation is maintained in [https://github.com/rivethealth/rivet-api](https://github.com/rivethealth/rivet-api)
+
+    # Authorization
+
+    ## API
+
+    Rivet uses OAuth2 to secure access to the API.
+
+    <SecurityDefinitions />
+
+    ## Web UI
+
+    Rivet allows web browser access via username/password, or by configuring a SAML identity provider. (TODO: fill in details)
+
+    # API paradigms
+
+    ## ref
+
+    Most resources have an optional external reference `ref` property that can be used to identify the resource in
+    another system.
+
+    This identifier must be unique across the Rivet account.
+
+    When creating new objects, if `ref` is the same as an existing object, the existing object is updated.
+
+
+    # Web UI
+
+    In addition the REST API, Rivet supports embedding Web UI.
+
+    ## Estimates
+
+    First, create an estimate using the REST API. It can be created as finalized or in draft mode.
+
+    To embeded an estimate, use the following URL in an iframe or new window.
+
+    `https://www.rivethealth.com/accountId/{accountId}/estimations/{estimationId}/embed`
+
+    When the estimate is saved, it uses `postMessage('estimationSaved')` to notify the parent window.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://www.rivethealth.com/terms
+  title: Rivet API
+  version: 0.0.0
+servers:
+  - description: Production
+    url: https://api.rivethealth.com/v1
+    variables: {}
+paths:
+  /accounts/{accountId}/business-units:
+    $ref: "./path/practice.yml#/~1accounts~1{accountId}~1business-units"
+  /accounts/{accountId}/business-units/{businessUnitId}:
+    $ref: "./path/practice.yml#/~1accounts~1{accountId}~1business-units~1{businessUnitId}"
+  /accounts/{accountId}/estimations:
+    $ref: "./path/estimate.yml#/~1accounts~1{accountId}~1estimations"
+  /accounts/{accountId}/estimation/{estimationId}:
+    $ref: "./path/estimate.yml#/~1accounts~1{accountId}~1estimation~1{estimationId}"
+  /accounts/{accountId}/estimation: {}
+  /accounts/{accountId}/estimation/{estimationId}/doc: {}
+  /accounts/{accountId}/estimation/{estimationId}/estimate:
+    $ref: "./path/estimate.yml#/~1accounts~1{accountId}~1estimation~1{estimationId}~1estimate"
+  /accounts/{accountId}/insurancePlans:
+    $ref: "./path/insurance.yml#/~1accounts~1{accountId}~1insurancePlans"
+  /accounts/{accountId}/patients: {}
+  /accounts/{accountId}/patients/{patientId}: {}
+  /accounts/{accountId}/patients/{patientId}/cob: {}
+  /accounts/{accountId}/insurance-plans: {}
+  /accounts/{accountId}/insurance-plans/{insurancePlanId}: {}
+  /accounts/{accountId}/insurance-policies: {}
+  /accounts/{accountId}/insurance-policies/{insuranceId}: {}
+  /accounts/{accountId}/providers/{providerId}:
+    $ref: "./path/provider.yml#/~1accounts~1{accountId}~1providers~1{providerId}"
+  /accounts/{accountId}/service-locations:
+    $ref: "./path/practice.yml#/~1accounts~1{accountId}~1service-locations"
+  /accounts/{accountId}/service-locations/{serviceLocationId}:
+    $ref: "./path/practice.yml#/~1accounts~1{accountId}~1service-locations~1{serviceLocationId}"
+tags:
+  - name: Estimates
+    description: Patient estimates.
+  - name: Insurance
+    description: Insurance payers and policies.
+  - name: Patients
+    description: Patients.
+  - name: Providers
+    description: Providers.
+  - name: Practice
+    description: Practice configuration.

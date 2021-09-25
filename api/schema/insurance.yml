@@ -1,0 +1,71 @@
+insurancePlan:
+  description: Insurance plan.
+  properties:
+    ref:
+      description: External reference.
+      title: Reference
+      type: string
+    name:
+      description: Name of insurance plan.
+      title: Name
+      type: string
+  requried: [name, ref]
+  title: Insurance plan
+insurancePlanItem:
+  description: Insurance plan list item.
+  properties:
+    id:
+      description: ID of insurance plan.
+      title: ID
+      type: string
+    name:
+      description: Name of insurance plan.
+      title: Name
+      type: string
+  required: [id, name]
+  title: Insurance plan item
+  type: object
+insurancePolicy:
+  description: Insurance policy.
+  properties:
+    insurancePlanId:
+      description: ID of insurance plan
+      title: Insurance plan ID
+      type: string
+    memberId:
+      description: Insurance-provided member ID.
+      title: Member ID
+      type: string
+    patientId:
+      description: Patient ID.
+      title: Patient ID
+      type: string
+    subscriber:
+      default: null
+      description: Insurance subscriber. Null if the patient is the subscriber.
+      properties:
+        birthdate:
+          description: Subscriber birthdate
+          format: date
+          title: Birthdate
+          type: string
+        name:
+          $ref: "./person.yml#/personName"
+          description: Name of subscriber
+          title: Name
+        relationship:
+          description: Relationship of subscriber to patient
+          enum:
+            - child
+            - domestic_partner
+            - other
+            - parent
+            - spouse
+            - unknown
+      required: [birthdate, name, relationship]
+      title: Subscriber
+      type: object
+      type: string
+  required: [insurancePlanId, memberId, patientId]
+  title: Insurance policy
+  type: object

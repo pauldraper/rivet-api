@@ -1,0 +1,57 @@
+businessUnit:
+  description: Business unit.
+  properties:
+    address: { $ref: "./location.yml#/address" }
+    ref:
+      description: External reference.
+      maxLength: 100
+      nullable: true
+      tile: Reference
+      type: string
+    tin:
+      description: Taxpayer identification number.
+      title: TIN
+      maxLength: 9
+      minLength: 9
+      pattern: "[0-9]{9}"
+      type: string
+    name:
+      description: Name of business unit.
+      maxLength: 200
+      title: Name
+      type: string
+  title: Business unit
+  type: object
+businessUnitItem:
+  description: Business unit.
+  properties:
+    id:
+      description: ID.
+      title: ID
+      type: string
+    value: { $ref: "#/businessUnit" }
+  title: Business unit item
+  type: object
+serviceLocation:
+  description: Service location.
+  properties:
+    address: { $ref: "./location.yml#/address" }
+    name:
+      description: Name of service location
+      maxLength: 200.
+      title: Name
+      type: string
+    placeOfService:
+      description: Place of service code. See
+        https://www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set
+      title: Place of service
+      type: string
+  required: [address, name, placeOfService]
+  title: Service location
+  type: object
+serviceLocationItem:
+  description: Service location.
+  properties:
+    id:
+      type: string
+    value: { $ref: "#/serviceLocation" }

@@ -1,0 +1,89 @@
+/accounts/{accountId}/business-units:
+  parameters:
+    - $ref: "../parameter/account.yml#/accountId"
+    - description: External reference
+      in: query
+      name: ref
+      schema: { type: string }
+  get:
+    operationId: list-business-units
+    responses:
+      "200":
+        content:
+          application/json:
+            schema: { $ref: "../schema/practice.yml#/businessUnitItem" }
+        description: Success.
+    summary: List business units
+    tags: [Practice]
+  post:
+    operationId: create-business-unit
+    responses:
+      "200":
+        content:
+          application/json:
+            schema: { $ref: "../schema/practice.yml#/businessUnitItem" }
+        description: Updated.
+      "201":
+        content:
+          application/json:
+            schema: { $ref: "../schema/practice.yml#/businessUnitItem" }
+        description: Created.
+    summary: Create business unit
+    tags: [Practice]
+/accounts/{accountId}/business-units/{businessUnitId}:
+  parameters:
+    - $ref: "../parameter/account.yml#/accountId"
+    - description: Business unit ID
+      in: path
+      name: businessUnitId
+      schema: { type: string }
+  get:
+    operationId: get-business-unit
+    responses:
+      "200":
+        content:
+          application/json:
+            schema: { $ref: "../schema/practice.yml#/businessUnit" }
+    summary: Get business unit
+    tags: [Practice]
+/accounts/{accountId}/service-locations:
+  parameters:
+    - $ref: "../parameter/account.yml#/accountId"
+  get:
+    operationId: list-service-locations
+    responses:
+      "200":
+        content:
+          application/json:
+            schema: { $ref: "../schema/practice.yml#/serviceLocationItem" }
+        description: Success.
+    summary: List service locations
+    tags: [Practice]
+  post:
+    operationId: create-service-location
+    responses:
+      "200":
+        content:
+          application/json:
+            schema: { $ref: "../schema/practice.yml#/serviceLocation" }
+        description: Success.
+    summary: Create service location
+    tags: [Practice]
+/accounts/{accountId}/service-locations/{serviceLocationId}:
+  get:
+    operationId: get-service-location
+    responses:
+      "200":
+        content:
+          application/json:
+            schema: { $ref: "../schema/practice.yml#/serviceLocation" }
+        description: Success.
+    summary: Get service location
+    tags: [Practice]
+  put:
+    operationId: update-service-location
+    responses:
+      "204":
+        description: Success.
+    summary: Update service location
+    tags: [Practice]

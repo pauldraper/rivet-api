@@ -1,0 +1,44 @@
+provider:
+  additionalProperties: false
+  description: Provider
+  properties:
+    address: { $ref: "./location.yml#/address" }
+    organizationName:
+      default: null
+      description: Name, if organization.
+      maxLength: 200
+      nullable: true
+      title: Organization name
+      type: string
+    personName:
+      $ref: "./person.yml#/personName"
+      default: null
+      description: Name, if person.
+      nullable: true
+      title: Person name
+    taxonomies:
+      default: []
+      description: Taxonomies
+      type: array
+      items: { type: string }
+    npi:
+      description: National Provider Identifier
+      title: NPI
+      type: string
+    type:
+      enum:
+        - organization
+        - person
+      title: Type
+  required: [address, npi, type]
+  title: Provider
+  type: object
+providerListItem:
+  additionalProperties: false
+  description: Provider list item.
+  properties:
+    id:
+      type: string
+    value: { $ref: "#/provider" }
+  required: [id, value]
+  title: Provider list item

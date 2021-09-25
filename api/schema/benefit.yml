@@ -1,0 +1,103 @@
+coinsurance:
+  additionalProperties: false
+  properties:
+    proportion:
+      type: string
+    comment:
+      default: ''
+      type: string
+    coverageLevel:
+      $ref: "#/coverageLevel"
+      default: null
+      nullable: true
+    placeOfService:
+      default: null
+      nullable: true
+      type: string
+    serviceType:
+      default: null
+      nullable: true
+      type: string
+  required: [proportion]
+copay:
+  additionalProperties: false
+  properties:
+    amount:
+      type: string
+    comment:
+      default: ''
+      type: string
+    coverageLevel:
+      $ref: "#/coverageLevel"
+      default: null
+      nullable: true
+    placeOfService:
+      default: null
+      nullable: true
+      type: string
+    serviceType:
+      default: null
+      nullable: true
+      type: string
+  required: [amount]
+coverageLevel:
+  description: Coverage level.
+  enum: [family, individual]
+  title: Coverage level
+  type: string
+deductible:
+  additionalProperties: false
+  properties:
+    comment:
+      default: ''
+      type: string
+    coverageLevel:
+      $ref: "#/coverageLevel"
+      default: null
+      nullable: true
+    placeOfService:
+      default: null
+      nullable: true
+      type: string
+    remaining:
+      type: string
+    serviceType:
+      default: null
+      nullable: true
+      type: string
+    total:
+      default: null
+      description: Total deductible
+      nullable: true
+      title: Total
+      type: string
+  required: [remaining]
+  type: object
+outOfPocketMax:
+  additionalProperties: false
+  properties:
+    comment:
+      default: ''
+      type: string
+    coverageLevel:
+      $ref: "#/coverageLevel"
+      default: null
+      nullable: true
+    placeOfService:
+      default: null
+      nullable: true
+      type: string
+    remaining:
+      type: string
+    serviceType:
+      default: null
+      nullable: true
+      type: string
+    total:
+      default: null
+      description: Total out of pocket max.
+      nullable: true
+      title: Total
+      type: string
+  required: [remaining]
+  type: object

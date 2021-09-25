@@ -1,0 +1,29 @@
+address:
+  description: Address.
+  title: Address
+  type: object
+  properties:
+    line1:
+      title: Line 1
+      type: string
+    line2:
+      default: ""
+      title: Line 2
+      type: string
+    city:
+      title: City
+      type: string
+    state:
+      description: State code, e.g. AK
+      title: State
+      type: string
+    country:
+      description: Country code, e.g. US
+      title: Country
+      type: string
+    postalCode:
+      default: ''
+      description: Postal code (ZIP code).
+      title: Postal code
+      type: string
+  required: [line1, city, state, country]
