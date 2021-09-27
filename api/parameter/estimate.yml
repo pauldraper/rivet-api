@@ -1,7 +1,0 @@
-estimationId:
-  name: estimationId
-  in: path
-  description: ID of estimation
-  required: true
-  schema:
-    type: string

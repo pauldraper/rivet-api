@@ -1,9 +1,0 @@
-/auth:
-  get:
-    description: Test authentication.
-    operatorId: auth
-    summary: Authentication
-    tags: [Other]
-    responses:
-      "200":
-        description: Success.
