@@ -1,3 +1,3 @@
 # Rivet API
 
-Documentation has moved to [https://io.rivethealth.com](https://io.rivethealth.com).
+Documentation has moved to [https://developer.rivethealth.com](https://developer.rivethealth.com).
